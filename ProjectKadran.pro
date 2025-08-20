@@ -1,0 +1,46 @@
+QT       += core gui
+QT       += 3dcore 3drender 3dinput 3dextras widgets gui
+QT       += quick
+QT       += quick3d
+QT       += quickwidgets
+QT       += quickcontrols2
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
+CONFIG += c++17
+
+# You can make your code fail to compile if it uses deprecated APIs.
+# In order to do so, uncomment the following line.
+#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
+
+# Varsayılan QML import path’lerini koruyup ekleme yapmak için += kullan
+QML_IMPORT_PATH += C:/Qt/6.8.1/msvc2022_64/qml
+QML_IMPORT_PATH += $$PWD/Generated
+
+
+SOURCES += \
+    fuelgauge.cpp \
+    main.cpp \
+    mainwindow.cpp \
+    speedometerwidget.cpp \
+    tachometerwidget.cpp
+
+HEADERS += \
+    fuelgauge.h \
+    mainwindow.h \
+    speedometerwidget.h \
+    tachometerwidget.h
+
+FORMS += \
+    mainwindow.ui
+
+# Default rules for deployment.
+qnx: target.path = /tmp/$${TARGET}/bin
+else: unix:!android: target.path = /opt/$${TARGET}/bin
+!isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    source.qrc
+
+
+
+
