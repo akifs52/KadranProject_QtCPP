@@ -22,13 +22,15 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     speedometerwidget.cpp \
-    tachometerwidget.cpp
+    tachometerwidget.cpp \
+    temperaturegauge.cpp
 
 HEADERS += \
     fuelgauge.h \
     mainwindow.h \
     speedometerwidget.h \
-    tachometerwidget.h
+    tachometerwidget.h \
+    temperaturegauge.h
 
 FORMS += \
     mainwindow.ui

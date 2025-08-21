@@ -14,6 +14,13 @@
    <string>Kadran GUI</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">#centralwidget
+{
+	
+	background-color: rgb(0, 0, 0);
+}</string>
+   </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
     <property name="spacing">
      <number>0</number>
@@ -77,12 +84,112 @@
        </property>
        <item>
         <widget class="QFrame" name="frame_5">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>50</height>
+          </size>
+         </property>
          <property name="frameShape">
           <enum>QFrame::Shape::StyledPanel</enum>
          </property>
          <property name="frameShadow">
           <enum>QFrame::Shadow::Raised</enum>
          </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>101</width>
+              <height>19</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="leftLabelSignal">
+            <property name="minimumSize">
+             <size>
+              <width>50</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLabel{
+
+	color: rgb(255, 255, 255);
+	border-radius:10px;
+	background-color: darkgreen;
+}</string>
+            </property>
+            <property name="text">
+             <string>&lt;-</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignmentFlag::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="leftSignal">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton
+{
+	border-radius:10px;
+	background-color:rgb(170, 170, 127);
+	
+}
+
+QPushButton:hover{
+	
+	border: 2px solid red;
+	border-radius: 10px;
+
+}
+QPushButton:pressed
+{
+	border: 2px solid white;
+	border-radius: 10px;
+}</string>
+            </property>
+            <property name="text">
+             <string>signal</string>
+            </property>
+            <property name="checkable">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>101</width>
+              <height>19</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
         </widget>
        </item>
        <item>
@@ -90,7 +197,7 @@
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>500</height>
+           <height>550</height>
           </size>
          </property>
          <property name="frameShape">
@@ -116,7 +223,7 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QFrame" name="devir">
+           <widget class="QFrame" name="rpm">
             <property name="frameShape">
              <enum>QFrame::Shape::StyledPanel</enum>
             </property>
@@ -143,16 +250,55 @@
            </widget>
           </item>
           <item>
-           <widget class="QFrame" name="frame_8">
+           <widget class="QFrame" name="temperature">
             <property name="frameShape">
              <enum>QFrame::Shape::StyledPanel</enum>
             </property>
             <property name="frameShadow">
              <enum>QFrame::Shadow::Raised</enum>
             </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+            </layout>
            </widget>
           </item>
          </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame_2">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::Shape::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Shadow::Raised</enum>
+         </property>
         </widget>
        </item>
       </layout>
@@ -264,12 +410,124 @@ QFrame:hover
        </property>
        <item>
         <widget class="QFrame" name="frame_3">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>50</height>
+          </size>
+         </property>
          <property name="frameShape">
           <enum>QFrame::Shape::StyledPanel</enum>
          </property>
          <property name="frameShadow">
           <enum>QFrame::Shadow::Raised</enum>
          </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>101</width>
+              <height>19</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="rightSignal">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton
+{
+	border-radius:10px;
+	background-color:rgb(170, 170, 127)
+	
+}
+
+QPushButton:hover
+{
+	border: 2px solid red;
+	border-radius: 10px;
+}
+
+QPushButton:pressed
+{
+	border: 2px solid white;
+	border-radius: 10px;
+}</string>
+            </property>
+            <property name="text">
+             <string>signal</string>
+            </property>
+            <property name="checkable">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="rightLabelSignal">
+            <property name="minimumSize">
+             <size>
+              <width>50</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="contextMenuPolicy">
+             <enum>Qt::ContextMenuPolicy::DefaultContextMenu</enum>
+            </property>
+            <property name="layoutDirection">
+             <enum>Qt::LayoutDirection::LeftToRight</enum>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLabel{
+
+	color: rgb(255, 255, 255);
+	border-radius:10px;
+	background-color: darkgreen;
+}</string>
+            </property>
+            <property name="text">
+             <string>-&gt;</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignmentFlag::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>101</width>
+              <height>19</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
         </widget>
        </item>
        <item>
@@ -354,6 +612,28 @@ QFrame:hover
               <number>0</number>
              </property>
             </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Shadow::Raised</enum>
+            </property>
            </widget>
           </item>
          </layout>
