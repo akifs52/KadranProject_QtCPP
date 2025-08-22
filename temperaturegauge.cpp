@@ -68,6 +68,7 @@ void TemperatureGauge::paintEvent(QPaintEvent *event)
         // Draw labels
         QFont font = painter.font();
         font.setPointSize(12);
+        font.setWeight(QFont::Bold);
         painter.setFont(font);
         painter.setPen(Qt::cyan);
 
@@ -99,12 +100,20 @@ void TemperatureGauge::paintEvent(QPaintEvent *event)
 
     // Draw current temperature value
     painter.setPen(Qt::cyan);
+    // Yazı ayarları
     QFont valueFont = painter.font();
     valueFont.setPointSize(16);
-    valueFont.setBold(true);
+    valueFont.setWeight(QFont::Bold);  // Extra bold
     painter.setFont(valueFont);
 
+    // Kutu
+    QRectF box(center.x() - 50, center.y() + size/2 - 115, 100, 40);
+    painter.setPen(QPen(QColor(0,200,200), 2));
+    painter.setBrush(QColor(0, 0, 0));
+    painter.drawRoundedRect(box,10,10);
+
+    // Yazı
+    painter.setPen(Qt::cyan);
     QString valueText = QString::number(temperatureLevel, 'f', 1) + "°C";
-    QRect valueRect(center.x() - 50, center.y() + size/4, 100, 30);
-    painter.drawText(valueRect, Qt::AlignCenter, valueText);
+    painter.drawText(box, Qt::AlignCenter, valueText);
 }

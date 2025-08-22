@@ -102,7 +102,6 @@ void MainWindow::on_speedSlider_valueChanged(int value)
 
 void MainWindow::on_fuelSlider_valueChanged(int value)
 {
-    float fuelValue = value/10.0f;
-    fuelGauge->setFuelLevel(fuelValue);
+    fuelGauge->setFuelLevel(value);
 }
 

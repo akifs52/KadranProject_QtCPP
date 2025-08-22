@@ -5,13 +5,13 @@
 #include <QtMath>
 
 FuelGauge::FuelGauge(QWidget *parent)
-    : QWidget(parent), fuelLevel(0.5)   // Başlangıçta %50
+    : QWidget(parent), fuelLevel(0)   // Başlangıçta %50
 {
     setMinimumSize(280, 280);
 }
 
-void FuelGauge::setFuelLevel(double level) {
-    fuelLevel = qBound(0.0, level, 1.0);
+void FuelGauge::setFuelLevel(int level) {
+    fuelLevel = qBound(0, level, 800);
     update();
 }
 
@@ -64,6 +64,7 @@ void FuelGauge::paintEvent(QPaintEvent *event)
     // Yazılar (F, 1/2, E)
     QFont font = painter.font();
     font.setPointSize(12);
+    font.setWeight(QFont::Bold);
     painter.setFont(font);
     painter.setPen(QColor(0, 200, 200));
 
@@ -75,7 +76,9 @@ void FuelGauge::paintEvent(QPaintEvent *event)
     painter.drawText(center.x() + size/2 - 20, center.y(), "E");
 
     // İbre
-    double angle = startAngle + (1.0 - fuelLevel) * (endAngle - startAngle);
+    double ratio = (double)fuelLevel / 800.0;
+    double angle = startAngle + (1.0 - ratio) * (endAngle - startAngle);
+
 
     painter.setPen(QPen(Qt::red, 4));
     QPointF needle(
@@ -84,9 +87,21 @@ void FuelGauge::paintEvent(QPaintEvent *event)
         );
     painter.drawLine(center, needle);
 
-
     // Merkez yuvarlak
     painter.setBrush(QColor(0, 200, 200));
     painter.setPen(Qt::NoPen);
     painter.drawEllipse(center, 10, 10);
+
+
+    // --- Kalan KM kutusu ---
+    QRectF box(center.x() - 50, center.y() + size/2 -115, 100, 40);
+    painter.setPen(QPen(QColor(0,200,200), 2));
+    painter.setBrush(QColor(0, 0, 0));  // koyu arka plan
+    painter.drawRoundedRect(box, 10, 10);  // <-- yuvarlatılmış köşeler
+
+    painter.setPen(Qt::cyan);
+    font.setPointSize(16);
+    font.setWeight(QFont::Bold);
+    painter.setFont(font);
+    painter.drawText(box, Qt::AlignCenter, QString("%1 km").arg(fuelLevel));
 }

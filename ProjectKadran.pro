@@ -1,5 +1,5 @@
 QT       += core gui
-QT       += 3dcore 3drender 3dinput 3dextras widgets gui
+#QT       += 3dcore 3drender 3dinput 3dextras widgets gui
 QT       += quick
 QT       += quick3d
 QT       += quickwidgets

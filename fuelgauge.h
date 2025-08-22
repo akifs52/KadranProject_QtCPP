@@ -10,13 +10,13 @@ class FuelGauge : public QWidget
 public:
     explicit FuelGauge(QWidget *parent = nullptr);
 
-    void setFuelLevel(double level); // 0.0 = boş (E), 1.0 = full (F)
+    void setFuelLevel(int level); // 0 = boş (E), 800= full (F)
 
 protected:
     void paintEvent(QPaintEvent *event) override;
 
 private:
-    double fuelLevel;  // 0.0 ile 1.0 arası
+    int fuelLevel; // 0 ile 800 arası
 };
 
 #endif // FUELGAUGE_H

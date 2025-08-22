@@ -4,8 +4,8 @@ import QtQuick3D 6.7
 import QtQuick3D.Helpers
 import QtQuick.Layouts
 import QtQuick.Controls
-import QtLocation 5.15
-import QtPositioning 5.15
+import QtLocation 6.7
+import QtPositioning 6.7
 
 Rectangle {
     id: rectangle
