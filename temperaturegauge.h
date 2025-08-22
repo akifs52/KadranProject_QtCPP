@@ -9,7 +9,7 @@ class TemperatureGauge : public QWidget
 
 public:
     explicit TemperatureGauge(QWidget *parent = nullptr);
-    void setTemperatureLevel(double level); // 0.0 - 1.0 arası
+    void setTemperatureLevel(float level); // 0.0 - 1.0 arası
 
 protected:
     void paintEvent(QPaintEvent *event) override;

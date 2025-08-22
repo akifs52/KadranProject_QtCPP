@@ -15,7 +15,7 @@ protected:
     void paintEvent(QPaintEvent *event) override;
 
 private:
-    int speed; // 0 - 200 arası hız
+    int speed; // 0 - 260 arası hız
 };
 
 #endif // SPEEDOMETERWIDGET_H

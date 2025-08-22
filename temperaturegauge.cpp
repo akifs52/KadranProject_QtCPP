@@ -5,13 +5,14 @@
 #include <QtMath>
 
 TemperatureGauge::TemperatureGauge(QWidget *parent)
-    : QWidget(parent), temperatureLevel(0.5) // Başlangıçta %50 (90°C)
+    : QWidget(parent), temperatureLevel(90.0) // Start at 90°C
 {
     setMinimumSize(280, 280);
 }
 
-void TemperatureGauge::setTemperatureLevel(double level) {
-    temperatureLevel = qBound(0.0, level, 1.0);
+void TemperatureGauge::setTemperatureLevel(float temperature) {
+    // Clamp temperature between 0 and 180°C
+    temperatureLevel = qBound(0.0f, temperature, 180.0f);
     update();
 }
 
@@ -27,60 +28,83 @@ void TemperatureGauge::paintEvent(QPaintEvent *event)
     int size = qMin(w, h) - 20;
     QPoint center(w / 2, h / 2);
 
-    double totalAngle = 180;
+    // Draw the arc background
+    double totalAngle = 180.0;
     QRectF arcRect(center.x() - size/2, center.y() - size/2, size, size);
 
-    // Cyan bölge (0–60°C)
+    // Cyan region (0–60°C)
     painter.setPen(QPen(QColor(0, 200, 200), 6));
     painter.drawArc(arcRect, (180 - 0) * 16, -60 * 16);
 
-    // Yeşil bölge (60–120°C)
+    // Green region (60–120°C)
     painter.setPen(QPen(QColor(0, 180, 0), 6));
     painter.drawArc(arcRect, (180 - 60) * 16, -60 * 16);
 
-    // Kırmızı bölge (120–180°C)
+    // Red region (120–180°C)
     painter.setPen(QPen(Qt::red, 6));
     painter.drawArc(arcRect, (180 - 120) * 16, -60 * 16);
 
-    // Çentikler (0, 45, 90, 135, 180)
-    painter.setPen(QPen(Qt::gray, 2));
-    int tickCount = 4;
-    for (int i = 0; i <= tickCount; i++) {
-        double t = (double)i / tickCount;
-        double angle = 180 - t * totalAngle;
+    // Draw ticks
+    painter.setPen(QPen(Qt::cyan, 2));
+    QStringList tickLabels = {"0°C", "45°C", "90°C", "135°C", "180°C"};
+    int tickCount = tickLabels.size() - 1;
 
-        QPointF p1(
-            center.x() + (size/2 - 6) * qCos(qDegreesToRadians(angle)),
-            center.y() - (size/2 - 6) * qSin(qDegreesToRadians(angle))
+    for (int i = 0; i <= tickCount; i++) {
+        double angle = 180.0 - (i * 45.0);
+        double radianAngle = qDegreesToRadians(angle);
+
+        QPointF innerPoint(
+            center.x() + (size/2 - 15) * qCos(radianAngle),
+            center.y() - (size/2 - 15) * qSin(radianAngle)
             );
-        QPointF p2(
-            center.x() + (size/2 + 6) * qCos(qDegreesToRadians(angle)),
-            center.y() - (size/2 + 6) * qSin(qDegreesToRadians(angle))
+
+        QPointF outerPoint(
+            center.x() + (size/2 + 5) * qCos(radianAngle),
+            center.y() - (size/2 + 5) * qSin(radianAngle)
             );
-        painter.drawLine(p1, p2);
+
+        painter.drawLine(innerPoint, outerPoint);
+
+        // Draw labels
+        QFont font = painter.font();
+        font.setPointSize(12);
+        painter.setFont(font);
+        painter.setPen(Qt::cyan);
+
+        QPointF textPoint(
+            center.x() + (size/2 - 40) * qCos(radianAngle),
+            center.y() - (size/2 - 40) * qSin(radianAngle)
+            );
+
+        // Adjust text alignment
+        QRect textRect(textPoint.x() - 20, textPoint.y() - 10, 40, 20);
+        painter.drawText(textRect, Qt::AlignCenter, tickLabels[i]);
     }
 
-    // Yazılar (0°C, 90°C, 180°C)
-    QFont font = painter.font();
-    font.setPointSize(12);
-    painter.setFont(font);
-    painter.setPen(QColor(0, 200, 200));
+    // Draw needle
+    double needleAngle = 180.0 - temperatureLevel; // 0°C at 180°, 180°C at 0°
+    double needleRadians = qDegreesToRadians(needleAngle);
 
-    painter.drawText(center.x() - size/2 + 10, center.y(), "0°C");
-    painter.drawText(center.x() - 20, center.y() - size/2 + 25, "90°C");
-    painter.drawText(center.x() + size/2 - 40, center.y(), "180°C");
-
-    // İbre
-    double angle = 180 - temperatureLevel * totalAngle;
-    painter.setPen(QPen(Qt::red, 4));
-    QPointF needle(
-        center.x() + (size/2 - 20) * qCos(qDegreesToRadians(angle)),
-        center.y() - (size/2 - 20) * qSin(qDegreesToRadians(angle))
+    painter.setPen(QPen(Qt::red, 3));
+    QPointF needleTip(
+        center.x() + (size/2 - 25) * qCos(needleRadians),
+        center.y() - (size/2 - 25) * qSin(needleRadians)
         );
-    painter.drawLine(center, needle);
+    painter.drawLine(center, needleTip);
 
-    // Merkez yuvarlak
-    painter.setBrush(QColor(0, 200, 200));
+    // Draw center circle
+    painter.setBrush(Qt::cyan);
     painter.setPen(Qt::NoPen);
-    painter.drawEllipse(center, 10, 10);
+    painter.drawEllipse(center, 8, 8);
+
+    // Draw current temperature value
+    painter.setPen(Qt::cyan);
+    QFont valueFont = painter.font();
+    valueFont.setPointSize(16);
+    valueFont.setBold(true);
+    painter.setFont(valueFont);
+
+    QString valueText = QString::number(temperatureLevel, 'f', 1) + "°C";
+    QRect valueRect(center.x() - 50, center.y() + size/4, 100, 30);
+    painter.drawText(valueRect, Qt::AlignCenter, valueText);
 }

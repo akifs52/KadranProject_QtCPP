@@ -78,4 +78,17 @@ void SpeedometerWidget::paintEvent(QPaintEvent *event)
     p.setPen(Qt::red);
     p.drawPolygon(needle, 3);
 
+    // --- Hız Değeri (Beyaz dikdörtgen içinde) ---
+    QRect speedRect(-50, 80, 100, 40);   // dairenin altı
+    p.setBrush(Qt::white);
+    p.setPen(Qt::black);
+    p.drawRect(speedRect);
+
+    QFont speedFont = p.font();
+    speedFont.setPointSize(16);
+    speedFont.setBold(true);
+    p.setFont(speedFont);
+
+    p.drawText(speedRect, Qt::AlignCenter, QString::number(speed));
+
 }

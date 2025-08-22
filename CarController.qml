@@ -4,6 +4,8 @@ import QtQuick3D 6.7
 import QtQuick3D.Helpers
 import QtQuick.Layouts
 import QtQuick.Controls
+import QtLocation 5.15
+import QtPositioning 5.15
 
 Rectangle {
     id: rectangle
@@ -154,7 +156,7 @@ Rectangle {
         PerspectiveCamera {
             id: sceneCamera
             x: 0
-            y: 250
+            y: 200
             z: -600
             eulerRotation.x: -15
             eulerRotation.y: 180
@@ -169,7 +171,7 @@ Rectangle {
             id: carRoot
             objectName: "carRoot"
             scale: Qt.vector3d(100, 100, 100)
-            eulerRotation: Qt.vector3d(-10, 0, 0)
+            eulerRotation: Qt.vector3d(-5, 0, 0)
             x: 0
             y: 50
             z: 0
@@ -422,40 +424,137 @@ Rectangle {
     MouseArea {
         id: mouseArea
           anchors {
-              top: parent.top
+              top: rectangle1.bottom  //map alan dışı
               left: parent.left
               right: parent.right
               bottom: controlButtonsRow.top   // butonların alanını hariç tutuyoruz
           }
 
-          property real lastX: 0
-          property real lastY: 0
-          property real velX: 0
-          property real velY: 0
-          property bool dragging: false
+              property real velX: 0
+              property real velY: 0
+              property real lastX: 0
+              property real lastY: 0
 
-          onPressed: {
-              lastX = mouse.x
-              lastY = mouse.y
-              dragging = true
-              velX = 0
-              velY = 0
-          }
-          onReleased: dragging = false
+              onPressed: {
+                  lastX = mouse.x
+                  lastY = mouse.y
+                  velX = 0
+                  velY = 0
+              }
 
-          onPositionChanged: {
-              if (mouse.buttons & Qt.LeftButton) {
-                  let dx = mouse.x - lastX
-                  let dy = mouse.y - lastY
-                  carRoot.eulerRotation.y += dx * 0.5
-                  carRoot.eulerRotation.x += dy * 0.5
-                  velX = dx * 0.5
-                  velY = dy * 0.5
+              onPositionChanged: {
+                  velX = mouse.x - lastX
+                  velY = mouse.y - lastY
+                  carRoot.eulerRotation.y += velX
+                  carRoot.eulerRotation.x += velY
                   lastX = mouse.x
                   lastY = mouse.y
               }
-          }
     }
+
+    Rectangle {
+        id: rectangle1
+        height: rectangle.height*0.2
+        color: "#ffffff"
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+
+        Plugin {
+            id: mapPlugin
+            name: "osm" // OpenStreetMap
+        }
+
+        PositionSource {
+            id: positionSource
+            active: true
+            updateInterval: 1000
+            onPositionChanged: {
+                map.center = position.coordinate
+                marker.coordinate = position.coordinate
+            }
+        }
+
+        property real zoomStep: 0.5
+        property real panStartX: 0
+        property real panStartY: 0
+
+        Map {
+            id: map
+            anchors.fill: parent
+            plugin: mapPlugin
+            zoomLevel: 15
+            center: QtPositioning.coordinate(39.9208, 32.8541)
+            focus: true
+
+            // 🔴 Konum işaretçisi
+            MapQuickItem {
+                id: marker
+                anchorPoint.x: 10
+                anchorPoint.y: 10
+                coordinate: QtPositioning.coordinate(0, 0)
+                sourceItem: Rectangle {
+                    width: 20
+                    height: 20
+                    color: "red"
+                    radius: 10
+                    border.color: "white"
+                    border.width: 2
+                }
+            }
+
+            // 🖱 MouseArea: Sürükleme ve Scroll Zoom
+            MouseArea {
+                id: dragArea
+                anchors.fill: parent
+                drag.target: null
+                property bool panning: false
+
+                onPressed: {
+                    panning = true
+                    rectangle1.panStartX = mouse.x
+                    rectangle1.panStartY = mouse.y
+                }
+
+                onReleased: {
+                    panning = false
+                }
+
+                onPositionChanged: {
+                    if (panning) {
+                        var dx = mouse.x - rectangle1.panStartX
+                        var dy = mouse.y - rectangle1.panStartY
+                        map.pan(-dx, -dy)
+                        rectangle1.panStartX = mouse.x
+                        rectangle1.panStartY = mouse.y
+                    }
+                }
+
+                onWheel: {
+                    if (wheel.angleDelta.y > 0)
+                        map.zoomLevel += rectangle1.zoomStep
+                    else
+                        map.zoomLevel -= rectangle1.zoomStep
+                }
+            }
+        }
+
+        // 🔽 Zoom seviyesi göstergesi
+        Label {
+            text: "Zoom: " + map.zoomLevel.toFixed(1)
+            anchors.top: parent.top
+            anchors.left: parent.left
+            padding: 6
+            background: Rectangle {
+                color: "black"
+                opacity: 0.6
+                radius: 6
+            }
+            color: "white"
+        }
+
+    }
+
 
     WheelHandler {
         id: wheelHandler
@@ -474,8 +573,8 @@ Rectangle {
         repeat: true
         onTriggered: {
             if (!mouseArea.dragging) {
-                mouseArea.velX *= 0.95
-                mouseArea.velY *= 0.95
+                mouseArea.velX *= 0.55
+                mouseArea.velY *= 0.55
                 carRoot.eulerRotation.y += mouseArea.velX
                 carRoot.eulerRotation.x += mouseArea.velY
                 if (Math.abs(mouseArea.velX) < 0.01 &&
@@ -539,3 +638,9 @@ Rectangle {
         }
     }
 }
+
+/*##^##
+Designer {
+    D{i:0}D{i:12;cameraSpeed3d:25;cameraSpeed3dMultiplier:1}D{i:33;cameraSpeed3d:25;cameraSpeed3dMultiplier:1}
+}
+##^##*/

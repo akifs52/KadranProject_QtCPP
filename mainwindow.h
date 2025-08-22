@@ -31,6 +31,14 @@ private slots:
 
     void on_rightSignal_clicked();
 
+    void on_RpmSlider_valueChanged(int value);
+
+    void on_TemperatureSlider_valueChanged(int value);
+
+    void on_speedSlider_valueChanged(int value);
+
+    void on_fuelSlider_valueChanged(int value);
+
 private:
     Ui::MainWindow *ui;
     SpeedometerWidget *speedometer;

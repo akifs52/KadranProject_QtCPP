@@ -14,10 +14,10 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->quickWidget->setSource(QUrl("qrc:/qml/CarController.qml"));
     ui->verticalLayout_6->addWidget(speedometer);
-    speedometer->setSpeed(160);
+    speedometer->setSpeed(0);
 
     ui->verticalLayout_7->addWidget(fuelGauge);
-    fuelGauge->setFuelLevel(1);
+    fuelGauge->setFuelLevel(0);
 
     ui->horizontalLayout_2->addWidget(rpm);
     rpm->setRpmValue(0);
@@ -78,5 +78,31 @@ void MainWindow::on_rightSignal_clicked()
     } else {
         blinkTimer2->start();
     }
+}
+
+
+void MainWindow::on_RpmSlider_valueChanged(int value)
+{
+    float rpmValue = value/10.0f;
+    rpm->setRpmValue(rpmValue);
+}
+
+
+void MainWindow::on_TemperatureSlider_valueChanged(int value)
+{
+    tempGauge->setTemperatureLevel(value);
+}
+
+
+void MainWindow::on_speedSlider_valueChanged(int value)
+{
+    speedometer->setSpeed(value);
+}
+
+
+void MainWindow::on_fuelSlider_valueChanged(int value)
+{
+    float fuelValue = value/10.0f;
+    fuelGauge->setFuelLevel(fuelValue);
 }
 
