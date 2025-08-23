@@ -5,7 +5,7 @@
 SpeedometerWidget::SpeedometerWidget(QWidget *parent)
     : QWidget(parent), speed(0)
 {
-    setMinimumSize(280, 280);
+    setMinimumSize(150, 150);
 }
 
 void SpeedometerWidget::setSpeed(int value)

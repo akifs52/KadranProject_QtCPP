@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1080</width>
-    <height>720</height>
+    <width>908</width>
+    <height>400</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -47,8 +47,14 @@
       </property>
       <property name="minimumSize">
        <size>
-        <width>300</width>
+        <width>200</width>
         <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>400</height>
        </size>
       </property>
       <property name="styleSheet">
@@ -218,7 +224,13 @@ QPushButton:pressed
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>550</height>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>300</height>
           </size>
          </property>
          <property name="frameShape">
@@ -245,6 +257,12 @@ QPushButton:pressed
           </property>
           <item>
            <widget class="QFrame" name="rpm">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>200</height>
+             </size>
+            </property>
             <property name="frameShape">
              <enum>QFrame::Shape::StyledPanel</enum>
             </property>
@@ -272,6 +290,12 @@ QPushButton:pressed
           </item>
           <item>
            <widget class="QFrame" name="temperature">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>200</height>
+             </size>
+            </property>
             <property name="frameShape">
              <enum>QFrame::Shape::StyledPanel</enum>
             </property>
@@ -412,8 +436,14 @@ QPushButton:pressed
       </property>
       <property name="minimumSize">
        <size>
-        <width>400</width>
+        <width>200</width>
         <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>400</height>
        </size>
       </property>
       <property name="styleSheet">
@@ -477,8 +507,14 @@ QFrame:hover
       </property>
       <property name="minimumSize">
        <size>
-        <width>300</width>
+        <width>200</width>
         <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>400</height>
        </size>
       </property>
       <property name="styleSheet">
@@ -523,7 +559,7 @@ QFrame:hover
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>40</height>
+           <height>0</height>
           </size>
          </property>
          <property name="maximumSize">
@@ -657,7 +693,13 @@ QPushButton:pressed
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>550</height>
+           <height>100</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>300</height>
           </size>
          </property>
          <property name="frameShape">
@@ -684,6 +726,12 @@ QPushButton:pressed
           </property>
           <item>
            <widget class="QFrame" name="speedometer">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>200</height>
+             </size>
+            </property>
             <property name="frameShape">
              <enum>QFrame::Shape::StyledPanel</enum>
             </property>
@@ -711,6 +759,12 @@ QPushButton:pressed
           </item>
           <item>
            <widget class="QFrame" name="fuel">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>200</height>
+             </size>
+            </property>
             <property name="frameShape">
              <enum>QFrame::Shape::StyledPanel</enum>
             </property>
@@ -736,18 +790,51 @@ QPushButton:pressed
             </layout>
            </widget>
           </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::Shape::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Shadow::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
           <item>
-           <widget class="QFrame" name="frame">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>50</height>
-             </size>
-            </property>
+           <widget class="QFrame" name="frame_9">
             <property name="maximumSize">
              <size>
-              <width>16777215</width>
-              <height>50</height>
+              <width>150</width>
+              <height>16777215</height>
              </size>
             </property>
             <property name="frameShape">
@@ -756,10 +843,7 @@ QPushButton:pressed
             <property name="frameShadow">
              <enum>QFrame::Shadow::Raised</enum>
             </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_7">
-             <property name="spacing">
-              <number>0</number>
-             </property>
+            <layout class="QVBoxLayout" name="verticalLayout_9">
              <property name="leftMargin">
               <number>0</number>
              </property>
@@ -773,66 +857,36 @@ QPushButton:pressed
               <number>0</number>
              </property>
              <item>
-              <widget class="QFrame" name="frame_9">
-               <property name="maximumSize">
-                <size>
-                 <width>150</width>
-                 <height>16777215</height>
-                </size>
+              <widget class="QSlider" name="speedSlider">
+               <property name="maximum">
+                <number>260</number>
                </property>
-               <property name="frameShape">
-                <enum>QFrame::Shape::StyledPanel</enum>
+               <property name="orientation">
+                <enum>Qt::Orientation::Horizontal</enum>
                </property>
-               <property name="frameShadow">
-                <enum>QFrame::Shadow::Raised</enum>
-               </property>
-               <layout class="QVBoxLayout" name="verticalLayout_9">
-                <property name="leftMargin">
-                 <number>0</number>
-                </property>
-                <property name="topMargin">
-                 <number>0</number>
-                </property>
-                <property name="rightMargin">
-                 <number>0</number>
-                </property>
-                <property name="bottomMargin">
-                 <number>0</number>
-                </property>
-                <item>
-                 <widget class="QSlider" name="speedSlider">
-                  <property name="maximum">
-                   <number>260</number>
-                  </property>
-                  <property name="orientation">
-                   <enum>Qt::Orientation::Horizontal</enum>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QSlider" name="fuelSlider">
-                  <property name="maximum">
-                   <number>800</number>
-                  </property>
-                  <property name="orientation">
-                   <enum>Qt::Orientation::Horizontal</enum>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
               </widget>
              </item>
              <item>
-              <widget class="QFrame" name="frame_10">
-               <property name="frameShape">
-                <enum>QFrame::Shape::StyledPanel</enum>
+              <widget class="QSlider" name="fuelSlider">
+               <property name="maximum">
+                <number>800</number>
                </property>
-               <property name="frameShadow">
-                <enum>QFrame::Shadow::Raised</enum>
+               <property name="orientation">
+                <enum>Qt::Orientation::Horizontal</enum>
                </property>
               </widget>
              </item>
             </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame_10">
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Shadow::Raised</enum>
+            </property>
            </widget>
           </item>
          </layout>

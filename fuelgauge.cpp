@@ -7,7 +7,7 @@
 FuelGauge::FuelGauge(QWidget *parent)
     : QWidget(parent), fuelLevel(0)   // Başlangıçta %50
 {
-    setMinimumSize(280, 280);
+    setMinimumSize(150, 150);
 }
 
 void FuelGauge::setFuelLevel(int level) {
@@ -94,7 +94,7 @@ void FuelGauge::paintEvent(QPaintEvent *event)
 
 
     // --- Kalan KM kutusu ---
-    QRectF box(center.x() - 50, center.y() + size/2 -115, 100, 40);
+    QRectF box(center.x() - 50, center.y() + size/2 -50, 100, 40);
     painter.setPen(QPen(QColor(0,200,200), 2));
     painter.setBrush(QColor(0, 0, 0));  // koyu arka plan
     painter.drawRoundedRect(box, 10, 10);  // <-- yuvarlatılmış köşeler

@@ -7,7 +7,7 @@
 TemperatureGauge::TemperatureGauge(QWidget *parent)
     : QWidget(parent), temperatureLevel(90.0) // Start at 90°C
 {
-    setMinimumSize(280, 280);
+    setMinimumSize(150, 150);
 }
 
 void TemperatureGauge::setTemperatureLevel(float temperature) {
@@ -68,13 +68,12 @@ void TemperatureGauge::paintEvent(QPaintEvent *event)
         // Draw labels
         QFont font = painter.font();
         font.setPointSize(12);
-        font.setWeight(QFont::Bold);
         painter.setFont(font);
         painter.setPen(Qt::cyan);
 
         QPointF textPoint(
-            center.x() + (size/2 - 40) * qCos(radianAngle),
-            center.y() - (size/2 - 40) * qSin(radianAngle)
+            center.x() + (size/2 - 20) * qCos(radianAngle),
+            center.y() - (size/2 - 20) * qSin(radianAngle)
             );
 
         // Adjust text alignment
@@ -102,12 +101,11 @@ void TemperatureGauge::paintEvent(QPaintEvent *event)
     painter.setPen(Qt::cyan);
     // Yazı ayarları
     QFont valueFont = painter.font();
-    valueFont.setPointSize(16);
-    valueFont.setWeight(QFont::Bold);  // Extra bold
+    valueFont.setPointSize(12);
     painter.setFont(valueFont);
 
     // Kutu
-    QRectF box(center.x() - 50, center.y() + size/2 - 115, 100, 40);
+    QRectF box(center.x() - 50, center.y() + size/2 - 50, 100, 40);
     painter.setPen(QPen(QColor(0,200,200), 2));
     painter.setBrush(QColor(0, 0, 0));
     painter.drawRoundedRect(box,10,10);

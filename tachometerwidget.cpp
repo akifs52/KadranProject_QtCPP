@@ -5,7 +5,7 @@
 TachometerWidget::TachometerWidget(QWidget *parent)
     : QWidget(parent), value(0.0f)
 {
-    setMinimumSize(280, 280);
+    setMinimumSize(150, 150);
 }
 
 void TachometerWidget::setRpmValue(float rpm)
